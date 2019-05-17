@@ -24,7 +24,7 @@ namespace searchfight.tests
             var googleEngine = BuildGoogleEngine();
 
             var sut = new Output(new[] { googleEngine });
-            await sut.find(new[] { wordDotnet });
+            await sut.Find(new[] { wordDotnet });
 
             var result = sut.PrintResultsByWord();
 
@@ -39,7 +39,7 @@ namespace searchfight.tests
             var googleEngine = BuildGoogleEngine();
 
             var sut = new Output(new[] { googleEngine, bingEngine });
-            await sut.find(new[] { wordJava });
+            await sut.Find(new[] { wordJava });
 
             var result = sut.PrintResultsByWord();
             var expected = $"{wordJava}: {bingEngine.Name}: 966000000 {googleEngine.Name}: 94381485";
@@ -54,7 +54,7 @@ namespace searchfight.tests
             var googleEngine = BuildGoogleEngine();
 
             var sut = new Output(new[] { googleEngine, bingEngine });
-            await sut.find(new[] { wordDotnet, wordJava });
+            await sut.Find(new[] { wordDotnet, wordJava });
 
             var results = sut.PrintResultsByWord();
             var expectedFirstLine = $"{wordDotnet}: {googleEngine.Name}: 4450000000 {bingEngine.Name}: 12354420 ";
@@ -71,7 +71,7 @@ namespace searchfight.tests
             var googleEngine = BuildGoogleEngine();
 
             var sut = new Output(new[] { googleEngine, bingEngine });
-            await sut.find(new[] { wordDotnet, wordJava });
+            await sut.Find(new[] { wordDotnet, wordJava });
             var results = sut.PrintWinnerByEngine();
 
 
@@ -89,7 +89,7 @@ namespace searchfight.tests
             var googleEngine = BuildGoogleEngine();
 
             var sut = new Output(new[] { googleEngine, bingEngine });
-            await sut.find(new[] { wordDotnet, wordJava });
+            await sut.Find(new[] { wordDotnet, wordJava });
             var results = sut.PrintTotalWinner();
 
             var expectedFirstLine = $"Total winner: {wordDotnet}";
@@ -102,8 +102,8 @@ namespace searchfight.tests
         {
             var mockGoogle = new Mock<IEngine>();
             mockGoogle.Setup(e => e.Name).Returns("Google");
-            mockGoogle.Setup(e => e.Find(wordJava)).Returns(new Result(966000000));
-            mockGoogle.Setup(e => e.Find(wordDotnet)).Returns(new Result(4450000000));
+            mockGoogle.Setup(e => e.Find(wordJava)).ReturnsAsync(new Result( 966000000));
+            mockGoogle.Setup(e => e.Find(wordDotnet)).ReturnsAsync(new Result(4450000000));
 
             return mockGoogle.Object;
         }
@@ -113,8 +113,8 @@ namespace searchfight.tests
 
             var mock = new Mock<IEngine>();
             mock.Setup(e => e.Name).Returns("Bing");
-            mock.Setup(e => e.Find(wordJava)).Returns(new Result(94381485));
-            mock.Setup(e => e.Find(wordDotnet)).Returns(new Result(12354420));
+            mock.Setup(e => e.Find(wordJava)).ReturnsAsync(new Result(94381485));
+            mock.Setup(e => e.Find(wordDotnet)).ReturnsAsync(new Result(12354420));
 
             return mock.Object;
         }

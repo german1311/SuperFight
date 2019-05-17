@@ -10,9 +10,13 @@ namespace searchfight.presentation.Engines
     {
         public Result(long total)
         {
-            this.Total = total;
+            //EngineName = engineName;
+            //Word = word;
+            Total = total;
         }
 
+        public string EngineName { get; set; }
+        public string Word { get; set; }
         public long Total { get; set; }
     }
 }
