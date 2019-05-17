@@ -19,12 +19,12 @@ namespace searchfight.presentation
             _results = new Dictionary<string, Result>();
         }
 
-        public string[] PrintResultsByWord()
+        public Task find(string[] words)
         {
             throw new NotImplementedException();
         }
 
-        public Task find(string[] words)
+        public string[] PrintResultsByWord()
         {
             throw new NotImplementedException();
         }
