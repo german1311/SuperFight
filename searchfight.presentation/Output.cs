@@ -24,6 +24,7 @@ namespace searchfight.presentation
 
         public async Task Find(string[] words)
         {
+            this._words = words;
             var searchs = words.ToList().SelectMany
                 (w => _engines.Select(async e => await e.Find(w)));
 
@@ -47,9 +48,10 @@ namespace searchfight.presentation
                 {
                     resultByWord
                         .Where(r => r.EngineName == engine.Name)
-                        .Select(r =>
+                        .ToList()
+                        .ForEach(r =>
                         {
-                            return output += $" {r.EngineName}: {r.Total}";
+                            output += $" {r.EngineName}: {r.Total}";                            
                         });
                 }
                 outputs.Add(output);
@@ -61,15 +63,6 @@ namespace searchfight.presentation
         public string[] PrintWinnerByEngine()
         {
             var outputs = new string[_engines.Count()];
-
-            //var winners = from r in _results
-            //              orderby r.Total descending
-            //              group r by r.EngineName into g
-            //              select new
-            //              {
-            //                  Engine = g.Key,
-            //                  Winner = g.Select(g => g.Word).FirstOrDefault()
-            //              };
 
             int index = 0;
             foreach (var engine in _engines)
