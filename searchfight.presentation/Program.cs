@@ -66,7 +66,7 @@ namespace searchfight.presentation
             //todo validate keys
             var bingEngine = new BingEngine(bingApiUrl, bingApiKey);
 
-            return new IEngine[] { googleEngine };
+            return new IEngine[] { googleEngine, bingEngine };
         }
     }
 }
