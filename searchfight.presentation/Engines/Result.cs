@@ -18,5 +18,15 @@ namespace searchfight.presentation.Engines
         public string EngineName { get; set; }
         public string Word { get; set; }
         public long Total { get; set; }
+
+        internal static Result Create(string engineName, string word, long totalEstimatedMatches)
+        {
+            return new Result(totalEstimatedMatches)
+            {
+                EngineName = engineName,
+                Word = word,
+                Total = totalEstimatedMatches
+            };
+        }
     }
 }

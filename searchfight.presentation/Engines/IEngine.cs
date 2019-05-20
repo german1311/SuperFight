@@ -9,6 +9,6 @@ namespace searchfight.presentation.Engines
     public interface IEngine
     {
         string Name { get; }
-        Task<Result> Find(string word);
+        Task<Result> FindAsync(string word);
     }
 }

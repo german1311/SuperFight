@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NLog;
 using searchfight.presentation.Engines;
 
 namespace searchfight.presentation
 {
     public class Output
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
         private IEnumerable<IEngine> _engines;
 
         //word - result search
@@ -26,14 +28,10 @@ namespace searchfight.presentation
         {
             this._words = words;
             var searchs = words.ToList().SelectMany
-                (w => _engines.Select(async e => await e.Find(w)));
+                (w => _engines.Select(async e => await e.FindAsync(w)));
 
             var results = await Task.WhenAll(searchs);
             _results = results.ToList();
-            //foreach (var result in results)
-            //{
-            //    _results.Add(result.Word, result);
-            //}
         }
 
         public string[] PrintResultsByWord()

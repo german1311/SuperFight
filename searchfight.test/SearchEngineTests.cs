@@ -1,4 +1,5 @@
-﻿using searchfight.presentation;
+﻿using Moq;
+using searchfight.presentation;
 using searchfight.presentation.Engines;
 using System;
 using System.Collections.Generic;
@@ -14,19 +15,22 @@ namespace searchfight.test
         private IEngine engine;
         public SearchEngineTests()
         {
-
+            var mock = new Mock<IEngine>();
+            mock.Setup(e => e.FindAsync(It.IsAny<string>())).ReturnsAsync(new Result(94381485));
+            engine = mock.Object;
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            engine = null;
         }
 
+        //todo: improve or delete test
         [Theory]
         [InlineData("c#")]        
-        public void MustAInstanceOfResult(string word)
+        public async Task MustAInstanceOfResult(string word)
         {
-            var result = engine.Find(word);
+            var result = await engine.FindAsync(word);
 
             Assert.IsType<Result>(result);
         }

@@ -102,12 +102,12 @@ namespace searchfight.test
         {
             var mockGoogle = new Mock<IEngine>();
             mockGoogle.Setup(e => e.Name).Returns("Google");
-            mockGoogle.Setup(e => e.Find(wordJava)).ReturnsAsync(new Result(966000000)
+            mockGoogle.Setup(e => e.FindAsync(wordJava)).ReturnsAsync(new Result(966000000)
             {
                 EngineName = "Google",
                 Word = wordJava
             });
-            mockGoogle.Setup(e => e.Find(wordDotnet)).ReturnsAsync(new Result(4450000000)
+            mockGoogle.Setup(e => e.FindAsync(wordDotnet)).ReturnsAsync(new Result(4450000000)
             {
                 EngineName = "Google",
                 Word = wordDotnet
@@ -118,15 +118,14 @@ namespace searchfight.test
 
         private IEngine BuildBingEngine()
         {
-
             var mock = new Mock<IEngine>();
             mock.Setup(e => e.Name).Returns("Bing");
-            mock.Setup(e => e.Find(wordJava)).ReturnsAsync(new Result(94381485)
+            mock.Setup(e => e.FindAsync(wordJava)).ReturnsAsync(new Result(94381485)
             {
                 EngineName = "Bing",
                 Word = wordJava
             });
-            mock.Setup(e => e.Find(wordDotnet)).ReturnsAsync(new Result(12354420)
+            mock.Setup(e => e.FindAsync(wordDotnet)).ReturnsAsync(new Result(12354420)
             {
                 EngineName = "Bing",
                 Word = wordDotnet

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "searchfight.presentation": {
+      "commandName": "Project",
+      "commandLineArgs": ".net \"java script\""
+    }
+  }
+}
